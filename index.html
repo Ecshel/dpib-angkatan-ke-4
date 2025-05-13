@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Foto Kenang Kenangan dengan Transisi Fade, Slide, dan Zoom</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: rgb(230, 240, 255);
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+  header {
+    background: rgb(141, 103, 254);
+    color: white;
+    width: 100%;
+    padding: 1rem 0;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+  }
+  main {
+    padding: 1rem;
+    max-width: 960px;
+    width: 90vw;
+    margin: 1rem auto 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(140px,1fr));
+    gap: 12px;
+  }
+  figure {
+    margin: 0;
+    cursor: pointer;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    background: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  figure:hover {
+    box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+    transform: scale(1.05);
+    z-index: 10;
+  }
+  img {
+    display: block;
+    width: 100%;
+    height: 110px;
+    object-fit: cover;
+    user-select: none;
+  }
+  figcaption {
+    text-align: center;
+    padding: 6px 4px;
+    font-size: 0.85rem;
+    color: #555;
+  }
+  @media (max-width: 400px) {
+    main {
+      grid-template-columns: repeat(auto-fill,minmax(110px,1fr));
+      gap: 8px;
+    }
+    img {
+      height: 90px;
+    }
+  }
+  /* Modal styles */
+  #modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  #modal.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  #modal-img-wrapper {
+    position: relative;
+    max-width: 90vw;
+    max-height: 80vh;
+    overflow: hidden;
+  }
+  #modal-img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(255,255,255,0.6);
+    transform: translateX(100px) scale(0) translateY(20px);
+    opacity: 0;
+    transition:
+      transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.45s ease;
+  }
+  #modal.open #modal-img {
+    transform: translateX(0) scale(1) translateY(0);
+    opacity: 1;
+  }
+  #modal-buttons {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  #modal-buttons a, #close-btn {
+    background: rgb(70, 130, 180);
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 6px 12px rgba(70,130,180,0.55);
+    user-select: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  #modal-buttons a:hover, #close-btn:hover {
+    background: rgb(40, 90, 150);
+    box-shadow: 0 8px 16px rgba(40,90,150,0.7);
+  }
+  #close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2.4rem;
+    line-height: 1;
+    background: transparent;
+    color: white;
+    box-shadow: none;
+    cursor: pointer;
+    padding: 0;
+    user-select: none;
+    border: none;
+    transition: color 0.3s ease;
+  }
+  #close-btn:hover {
+    color: #ccc;
+  }
+</style>
+</head>
+<body>
+<header>DPIB ANGKATAN ke 4</header>
+<main>
+  <!-- 50 images with captions -->
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-03 at 10.54.17_14aa03aa.jpg" /><figcaption>Kenangan 1</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-03 at 10.54.18_07532d94.jpg" /><figcaption>Kenangan 2</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-03 at 10.55.14_b178387d.jpg" /><figcaption>Kenangan 3</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-03 at 10.57.34_794c7f2c.jpg" /><figcaption>Kenangan 4</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-10 at 10.22.15_fe1b4de2.jpg" /><figcaption>Kenangan 5</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-07 at 20.25.15_163e95b1.jpg" /><figcaption>Kenangan 6</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-10 at 10.22.15_fe1b4de2.jpg" /><figcaption>Kenangan 7</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-07 at 20.25.23_8bbdaaee.jpg" /><figcaption>Kenangan 8</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-07 at 20.25.23_f6aea8dd.jpg" /><figcaption>Kenangan 9</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-07 at 20.25.24_68b77b9e.jpg" /><figcaption>Kenangan 10</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-07 at 20.25.24_68b77b9e.jpg" /><figcaption>Kenangan 11</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-07 at 21.46.08_763eb72c.jpg" /><figcaption>Kenangan 12</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-07 at 21.46.08_aab6477c.jpg" /><figcaption>Kenangan 13</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-10 at 10.20.21_b2488c53.jpg" /><figcaption>Kenangan 14</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-10 at 10.20.55_40ecc3bd.jpg" /><figcaption>Kenangan 15</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-10 at 10.20.57_ce8d3194.jpg" /><figcaption>Kenangan 16</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-10 at 10.20.57_e6c18590.jpg" /><figcaption>Kenangan 17</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-10 at 10.20.58_8abd9d8f.jpg" /><figcaption>Kenangan 18</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-10 at 10.22.12_4b23dd4c.jpg" /><figcaption>Kenangan 19</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-10 at 10.22.13_ca0e8967.jpg" /><figcaption>Kenangan 20</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-10 at 10.22.14_602ad794.jpg" /><figcaption>Kenangan 21</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-07 at 20.25.15_992d19c1.jpg" /><figcaption>Kenangan 22</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-07 at 20.25.14_db07aa0f.jpg" /><figcaption>Kenangan 23</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-10 at 10.22.16_e54fb8aa.jpg" /><figcaption>Kenangan 24</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-10 at 10.22.17_f45676c3.jpg" /><figcaption>Kenangan 25</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-10 at 10.22.18_c60f35df.jpg" /><figcaption>Kenangan 26</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-10 at 10.22.20_b083f859.jpg" /><figcaption>Kenangan 27</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-10 at 10.22.21_50b22779.jpg" /><figcaption>Kenangan 28</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-10 at 10.22.21_d328d29a.jpg" /><figcaption>Kenangan 29</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-10 at 10.22.22_ce0b3311.jpg" /><figcaption>Kenangan 30</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-10 at 10.22.22_1459513a.jpg" /><figcaption>Kenangan 31</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-10 at 10.22.23_64cbe369.jpg" /><figcaption>Kenangan 32</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-10 at 10.22.23_91e1d972.jpg" /><figcaption>Kenangan 33</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-10 at 10.22.23_275d500d.jpg" /><figcaption>Kenangan 34</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-10 at 10.22.23_fb57e633.jpg" /><figcaption>Kenangan 35</figcaption></figure>
+  <figure><img src="c:\Users\lenovo\OneDrive\画像\Buat edit\WhatsApp Image 2025-05-10 at 10.22.24_9b7434f4.jpg" /><figcaption>Kenangan 36</figcaption></figure>
+
+</main>
+
+<!-- Modal -->
+<div id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <button id="close-btn" aria-label="Tutup">&times;</button>
+  <div id="modal-img-wrapper">
+    <img id="modal-img" alt="Gambar diperbesar" />
+  </div>
+  <div id="modal-buttons">
+    <a id="download-btn" href="#" download target="_blank" rel="noopener" aria-label="Unduh gambar">⬇ Unduh</a>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modal-img');
+  const downloadBtn = document.getElementById('download-btn');
+  const closeBtn = document.getElementById('close-btn');
+
+  function openModal(img) {
+    const fullSrc = img.dataset.full || img.src;
+    // If the same image is clicked again and modal is open, just ignore to prevent repeated transition flicker
+    if (modal.classList.contains('open') && modalImg.src === fullSrc) {
+      return;
+    }
+    modalImg.style.transition = 'none'; // Reset transition before img swap for smooth animation
+    modalImg.style.transform = 'translateX(100px) scale(0) translateY(20px)';
+    modalImg.style.opacity = '0';
+    modal.classList.add('open');
+    modalImg.src = fullSrc;
+    modalImg.alt = img.alt || 'Gambar diperbesar';
+    downloadBtn.href = fullSrc;
+
+    // Allow browser to register style changes before adding transition & final styles
+    requestAnimationFrame(() => {
+      modalImg.style.transition = 'transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.45s ease';
+      modalImg.style.transform = 'translateX(0) scale(1) translateY(0)';
+      modalImg.style.opacity = '1';
+    });
+
+    closeBtn.focus();
+  }
+
+  function closeModal() {
+    modalImg.style.transform = 'translateX(100px) scale(0) translateY(20px)';
+    modalImg.style.opacity = '0';
+    // Wait for transition to finish before hiding modal and clearing src
+    setTimeout(() => {
+      modal.classList.remove('open');
+      modalImg.src = '';
+    }, 450);
+  }
+
+  document.querySelectorAll('main figure img').forEach(img => {
+    img.addEventListener('click', () => openModal(img));
+    img.style.cursor = 'pointer';
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) {
+      closeModal();
+    }
+  });
+</script>
+</body>
+</html>
